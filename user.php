@@ -26,6 +26,14 @@ if ($delete_id) {
 	<link rel="stylesheet" href="assets/css/responsive.css">
 </head>
 <body>
+
+
+<?php 
+
+ 
+
+
+?>
 	
 	
 
@@ -33,8 +41,29 @@ if ($delete_id) {
 	<a class="btn btn-primary" href="index.php"> add  student </a>
 	 <br>
 		<div class="card">
-			<div class="card-body">
+			<div class="card-body"> 
 				<h2>All Data</h2>
+				<form action="" class="form-inline" method="POST">
+					<div class="form-group">
+						<select class="form-control"  name="gender" id="">
+							<option value="">--select--</option>
+							<option value="male">male</option>
+							<option value="female">female</option>
+						</select>
+					</div>
+					<div class="form-group ">
+						<select class="form-control " name="edu" id="">
+							<option value="">--select--</option>
+							<option value="jsc">jsc</option>
+							<option value="ssc">ssc</option>
+							<option value="psc">psc</option>
+							<option value="hsc">hsc</option>
+						</select>
+					</div>
+					<div class="form-group ">
+				 <input type="submit" name="submit" class="btn btn-primary" value="search">
+					</div>
+				</form>
 				<table class="table table-striped">
 					<thead>
 						<tr>
@@ -50,10 +79,16 @@ if ($delete_id) {
 					<?php 
 							
 							$data = connect() -> query("SELECT * FROM users");
+							if (isset($_POST['submit'])) {
+								$gender = $_POST['gender'];
+								$edu = $_POST['edu'];
+								$data = connect() -> query("SELECT * FROM users WHERE gender='$gender'and education='$edu' ");
+							}
+							$sn = 1;
 
 							while($user = $data -> fetch_object()) : 
 							
-							 $sn = 1;
+							
 							?>
 						<tr>
 
